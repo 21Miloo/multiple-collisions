@@ -113,47 +113,11 @@ classDiagram
 
 ## Diagrama de flujo
 
-```mermaid
-flowchart TD
-    A([Inicio de main]) --> B["Constantes<br/>dt = 0.01, nPasos = 3000, e = 0.7"]
+Cada caja indica la función que se llama y la clase a la que pertenece (`Clase::funcion()`); el color identifica la clase.
 
-    B --> C["Box(200, 100)<br/>objeto temporal"]
-    C --> D["Constructor de Simulador<br/>miembros en orden de declaración:<br/>1. caja ← copia de la Box<br/>2. particulas ← vector vacío<br/>3. obstaculos ← vector vacío<br/>4. dt, t = 0<br/>5. salida ← abre simulacion.txt"]
-    D --> D1{"¿Se abrió el archivo?"}
-    D1 -- No --> D2["Mensaje de error en cerr"] --> E
-    D1 -- Sí --> E
+![Diagrama de flujo](docs/flujo.svg)
 
-    E["Crear 4 Obstaculo(x, y, lado, e)<br/>agregarObstaculo → push_back (copia)"]
-    E --> F["Crear 5 Particula(id, x, y, vx, vy, m, r)<br/>agregarParticula → push_back (copia)"]
-
-    F --> G["sim.ejecutar(nPasos)"]
-    G --> H["registrarEscena()<br/>escribe CAJA y OBS"]
-    H --> I["registrarPosiciones()<br/>POS en t = 0"]
-    I --> J{"¿i menor que nPasos?"}
-
-    J -- Sí --> P0["paso(): t += dt"]
-    P0 --> P1{"¿Quedan partículas<br/>por recorrer?"}
-    P1 -- Sí --> P2{"¿p activa?"}
-    P2 -- No --> P1
-    P2 -- Sí --> P3["p.mover(dt)"]
-    P3 --> P4{"caja.rebotarParedes(p)"}
-    P4 -- true --> P5["registrar COL PARED"] --> P6
-    P4 -- false --> P6["Para cada obstáculo k:<br/>lado = detectarLado(p)"]
-    P6 --> P7{"lado ≠ NINGUNO y<br/>rebotar(p, lado)"}
-    P7 -- true --> P8["registrar COL OBSTACULO"] --> P1
-    P7 -- false --> P1
-
-    P1 -- No --> Q1["detectarColisionesParticulas()<br/>para cada par i, j"]
-    Q1 --> Q2{"colisionaCon"}
-    Q2 -- true --> Q3["registrar COL PARTICULA<br/>i.fusionar(j) → j inactiva"]
-    Q2 -- false --> R
-    Q3 --> R["registrarPosiciones()<br/>solo partículas activas"]
-    R --> J
-
-    J -- No --> S["Mensaje: Simulación terminada"]
-    S --> T["Fin de main: se destruye sim<br/>→ ofstream cierra el archivo"]
-    T --> U([Fin])
-```
+El diagrama es editable: abre [`docs/flujo.excalidraw`](docs/flujo.excalidraw) en [excalidraw.com](https://excalidraw.com) (menú → Abrir).
 
 ## Simplificaciones
 
