@@ -33,6 +33,34 @@ COL  t tipo id1 id2
 - `tipo` puede ser `PARED`, `OBSTACULO` o `PARTICULA`.
 - `id2` es `-1` para pared, el índice del obstáculo o el id de la otra partícula.
 
+## Gráfica de resultados
+
+El script [`graficar.py`](graficar.py) (Python + matplotlib) lee el archivo de salida y dibuja la caja, los obstáculos, la trayectoria de cada partícula y el punto donde ocurrió cada colisión:
+
+```bash
+pip install matplotlib
+python graficar.py simulacion.txt trayectorias.png --mostrar
+```
+
+Resultado de una corrida de ejemplo ([`resultados/simulacion.txt`](resultados/simulacion.txt)): 5 partículas, 30 s, `dt = 0.01 s`, `e = 0.7`.
+
+![Trayectorias de las partículas](resultados/trayectorias.png)
+
+| Colisiones | Cantidad |
+|---|---|
+| Con paredes | 18 |
+| Con obstáculos | 15 |
+| Entre partículas (fusiones) | 2 |
+
+## Verificación del momento lineal
+
+En cada fusión el programa imprime en consola el momento total antes y después del choque, para comprobar que se cumple `m1·v1 + m2·v2 = (m1 + m2)·v'`:
+
+```
+t = 3.95 s  fusion 2 + 3  |  p antes = (-42.5, 28.2)  p despues = (-42.5, 28.2)  ->  diferencia = (0, 0)
+t = 10.38 s  fusion 1 + 4  |  p antes = (-48.975, 49.26)  p despues = (-48.975, 49.26)  ->  diferencia = (0, 0)
+```
+
 ## Diagrama de clases
 
 ```mermaid

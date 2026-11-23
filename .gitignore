@@ -1,4 +1,6 @@
 build/
 .qtcreator/
 *.user
-simulacion.txt
+/simulacion.txt
+/trayectorias.png
+__pycache__/
