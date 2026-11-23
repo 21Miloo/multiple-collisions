@@ -143,9 +143,9 @@ classDiagram
 
 Cada caja indica la función que se llama y la clase a la que pertenece (`Clase::funcion()`); el color identifica la clase.
 
-![Diagrama de flujo](docs/flujo.svg)
+![Diagrama de flujo](docs/flujo.png)
 
-El diagrama es editable: abre [`docs/flujo.excalidraw`](docs/flujo.excalidraw) en [excalidraw.com](https://excalidraw.com) (menú → Abrir).
+El diagrama es editable: abre [`docs/flujo.excalidraw`](https://github.com/21Miloo/multiple-collisions/blob/main/docs/flujo.excalidraw) en [excalidraw.com](https://excalidraw.com) (menú → Abrir).
 
 ## Simplificaciones
 
