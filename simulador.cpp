@@ -55,9 +55,26 @@ void Simulador::detectarColisionesParticulas(){
     for (size_t i = 0; i < particulas.size(); i++) {
         for (size_t j = i + 1; j < particulas.size(); j++) {
             if (particulas[i].colisionaCon(particulas[j])) {
-                registrarColision("PARTICULA", particulas[i].getId(), particulas[j].getId());
-                // i absorbe a j; j queda inactiva y ya no se mueve ni se registra
-                particulas[i].fusionar(particulas[j]);
+                Particula& a = particulas[i];
+                Particula& b = particulas[j];
+                registrarColision("PARTICULA", a.getId(), b.getId());
+
+                // Momento total antes: m1*v1 + m2*v2
+                double pxAntes = a.getMasa() * a.getVx() + b.getMasa() * b.getVx();
+                double pyAntes = a.getMasa() * a.getVy() + b.getMasa() * b.getVy();
+
+                // a absorbe a b; b queda inactiva y ya no se mueve ni se registra
+                a.fusionar(b);
+
+                // Momento total despues: (m1 + m2) * v'
+                double pxDespues = a.getMasa() * a.getVx();
+                double pyDespues = a.getMasa() * a.getVy();
+
+                std::cout << "t = " << t << " s  fusion " << a.getId() << " + " << b.getId()
+                          << "  |  p antes = (" << pxAntes << ", " << pyAntes << ")"
+                          << "  p despues = (" << pxDespues << ", " << pyDespues << ")"
+                          << "  ->  diferencia = (" << pxDespues - pxAntes << ", "
+                          << pyDespues - pyAntes << ")" << std::endl;
             }
         }
     }

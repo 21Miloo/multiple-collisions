@@ -5,7 +5,8 @@ using namespace std;
 
 int main(){
 
-    const double dt = 0.01;      // s
+    // Constantes
+    const double dt = 0.01;      // s (delta de tiempo)
     const int nPasos = 3000;     // 30 s de simulacion
     const double e = 0.7;        // coeficiente de restitucion de los obstaculos
 
